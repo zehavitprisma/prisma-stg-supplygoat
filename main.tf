@@ -4,14 +4,12 @@ resource "aws_s3_bucket" "data" {
   # bucket does not have access logs
   # bucket does not have versioning
   bucket        = "data1"
-  region        = "us-west-2"
   acl           = "public-read"
   force_destroy = true
 }
 
 resource "aws_s3_bucket_object" "data_object" {
   bucket = aws_s3_bucket.data.id
-  region        = "us-west-2"
   key    = "customer-master.xlsx"
   source = "resources/customer-master.xlsx"
 }
@@ -21,7 +19,6 @@ resource "aws_s3_bucket" "financials" {
   # bucket does not have access logs
   # bucket does not have versioning
   bucket        = "financials"
-  region        = "us-west-2"
   acl           = "private"
   force_destroy = true
 }
@@ -30,7 +27,6 @@ resource "aws_s3_bucket" "operations" {
   # bucket is not encrypted
   # bucket does not have access logs
   bucket = "operations"
-  region        = "us-west-2"
   acl    = "private"
   versioning {
     enabled = true
@@ -41,7 +37,6 @@ resource "aws_s3_bucket" "operations" {
 resource "aws_s3_bucket" "data_science" {
   # bucket is not encrypted
   bucket = "data-science"
-  region        = "us-west-2"
   acl    = "private"
   versioning {
     enabled = true
@@ -55,7 +50,6 @@ resource "aws_s3_bucket" "data_science" {
 
 resource "aws_s3_bucket" "logs" {
   bucket = "logs"
-  region = "us-west-2"
   acl    = "log-delivery-write"
   versioning {
     enabled = true
