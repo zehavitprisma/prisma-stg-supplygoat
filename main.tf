@@ -3,14 +3,10 @@ resource "aws_s3_bucket" "data" {
   # bucket is not encrypted
   # bucket does not have access logs
   # bucket does not have versioning
-  bucket        = "${local.resource_prefix.value}-data"
+  bucket        = "data1"
   region        = "us-west-2"
   acl           = "public-read"
   force_destroy = true
-  tags = {
-    Name        = "${local.resource_prefix.value}-data"
-    Environment = local.resource_prefix.value
-  }
 }
 
 resource "aws_s3_bucket_object" "data_object" {
@@ -18,47 +14,33 @@ resource "aws_s3_bucket_object" "data_object" {
   region        = "us-west-2"
   key    = "customer-master.xlsx"
   source = "resources/customer-master.xlsx"
-  tags = {
-    Name        = "${local.resource_prefix.value}-customer-master"
-    Environment = local.resource_prefix.value
-  }
 }
 
 resource "aws_s3_bucket" "financials" {
   # bucket is not encrypted
   # bucket does not have access logs
   # bucket does not have versioning
-  bucket        = "${local.resource_prefix.value}-financials"
+  bucket        = "financials"
   region        = "us-west-2"
   acl           = "private"
   force_destroy = true
-  tags = {
-    Name        = "${local.resource_prefix.value}-financials"
-    Environment = local.resource_prefix.value
-  }
-
 }
 
 resource "aws_s3_bucket" "operations" {
   # bucket is not encrypted
   # bucket does not have access logs
-  bucket = "${local.resource_prefix.value}-operations"
+  bucket = "operations"
   region        = "us-west-2"
   acl    = "private"
   versioning {
     enabled = true
   }
   force_destroy = true
-  tags = {
-    Name        = "${local.resource_prefix.value}-operations"
-    Environment = local.resource_prefix.value
-  }
-
 }
 
 resource "aws_s3_bucket" "data_science" {
   # bucket is not encrypted
-  bucket = "${local.resource_prefix.value}-data-science"
+  bucket = "data-science"
   region        = "us-west-2"
   acl    = "private"
   versioning {
@@ -72,7 +54,7 @@ resource "aws_s3_bucket" "data_science" {
 }
 
 resource "aws_s3_bucket" "logs" {
-  bucket = "${local.resource_prefix.value}-logs"
+  bucket = "logs"
   region = "us-west-2"
   acl    = "log-delivery-write"
   versioning {
@@ -88,7 +70,7 @@ resource "aws_s3_bucket" "logs" {
   }
   force_destroy = true
   tags = {
-    Name        = "${local.resource_prefix.value}-logs"
+    Name        = "logs"
     Environment = local.resource_prefix.value
   }
 }
